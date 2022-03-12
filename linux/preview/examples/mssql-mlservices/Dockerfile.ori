@@ -1,7 +1,5 @@
 # Maintainers: Microsoft Corporation 
-FROM jgwill/ubuntu:18.04
-
-ARG DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:18.04
 
 # copy in supervisord conf file
 COPY ./supervisord.conf /usr/local/etc/supervisord.conf
