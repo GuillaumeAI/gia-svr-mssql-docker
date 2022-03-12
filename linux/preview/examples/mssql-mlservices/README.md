@@ -1,6 +1,7 @@
 ----
 JGNotes: dockertag=guillaumeai/server:mssql-mls-220312 
 ----
+====
 
 SQL Server container images do not include Machine Learning Services to keep the image size down for typical use cases of SQL Server.  This Dockerfile provides an example of how to build a container image that does include ML Services.
 This sample includes Machine Learning Services including R and python - the resulting image is about 9GB.
