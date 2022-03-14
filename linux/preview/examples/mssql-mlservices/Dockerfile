@@ -42,7 +42,7 @@ RUN apt-get update && \
     rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
     
 # Install mssql-cli
-RUN apt update && apt-get install mssql-cli -y
+#RUN apt update && apt-get install mssql-cli -y
 
 # run checkinstallextensibility.sh
 RUN /opt/mssql/bin/checkinstallextensibility.sh && \
