@@ -1,12 +1,20 @@
 #!/bin/bash
-docker container run \
-    --name sql-ml \
-    --env 'ACCEPT_EULA=Y' \
-    --env 'MSSQL_PID=Developer' \
-    --env 'ACCEPT_EULA_ML=Y' \
-    --env 'MSSQL_SA_PASSWORD=My!SuperSecretPassw0rd' \
-    -v /tmp/mssql:/var/opt/mssql \
-    --publish 1433:1433 \
-    --detach \
-    mssql-server-mlservices
+
+. _env.sh
+. .env
+
+
+cmd="docker run -it --rm \
+    --name $containername \
+    -e 'ACCEPT_EULA=Y' \
+    -e 'MSSQL_PID=Developer' \
+    -e 'ACCEPT_EULA_ML=Y' \
+    -e 'MSSQL_SA_PASSWORD='$MSSQL_SA_PASSWORD  \
+    -v $MSSQL_MLS_LOCAL_PATH:/var/opt/mssql \
+    -p 1435:1433 \
+    $dockertag"
+echo "$cmd"
+$cmd
+
+    #mssql-server-mlservices
     
