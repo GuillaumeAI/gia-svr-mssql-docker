@@ -59,6 +59,7 @@ RUN /opt/mssql/bin/checkinstallextensibility.sh && \
 
 # expose SQL Server port
 EXPOSE 1433
+EXPOSE 3882
 
 # start services with supervisord
 CMD /usr/bin/supervisord -n -c /usr/local/etc/supervisord.conf
