@@ -1,7 +1,5 @@
 # Maintainers: Microsoft Corporation 
-FROM jgwill/ubuntu:18.04
-
-ARG DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:18.04
 
 # copy in supervisord conf file
 COPY ./supervisord.conf /usr/local/etc/supervisord.conf
@@ -32,7 +30,6 @@ RUN apt-get update && \
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/18.04/mssql-server-2019.list > /etc/apt/sources.list.d/mssql-server-2019.list
 
-
 # install SQL Server ML services R and Python packages which will also install the mssql-server pacakge, the package for SQL Server itself
 # if you want to install only Python or only R, you can add/remove the package as needed below
 RUN apt-get update && \
@@ -42,14 +39,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
     
-
-# # adding custom MS repository
-# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-# RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-
-# Install mssql-cli
-RUN apt update && apt-get install mssql-cli -y
 
 # run checkinstallextensibility.sh
 RUN /opt/mssql/bin/checkinstallextensibility.sh && \
