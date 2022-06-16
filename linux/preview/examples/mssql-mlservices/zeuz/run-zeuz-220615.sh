@@ -1,3 +1,7 @@
+echo "OLD -------------"
+echo "use:   srcroot/zeuzis"
+
+sleep 9999
 
 EULA_STUFF="-e MSSQL_PID=Developer -e ACCEPT_EULA=Y -e ACCEPT_EULA_ML=Y "
 ddir=/mnt/c/var/lib/mssql/data

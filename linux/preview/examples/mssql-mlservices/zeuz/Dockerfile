@@ -112,7 +112,7 @@ EXPOSE 3882
 
 #old # Run SQL Server process
 #CMD /opt/mssql/bin/sqlservr
-
+#COPY ./supervisord.conf /usr/local/etc/supervisord.conf
 
 # start services with supervisord
 CMD /usr/bin/supervisord -n -c /usr/local/etc/supervisord.conf
