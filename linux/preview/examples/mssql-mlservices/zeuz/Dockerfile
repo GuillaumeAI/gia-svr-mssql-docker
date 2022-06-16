@@ -1,6 +1,6 @@
 # Maintainers: Microsoft Corporation 
 #jgwill/ubuntu:16.04
-FROM jgwill/ubuntu:16.04
+FROM jgwill/ubuntu:16.04-py3.7.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 
