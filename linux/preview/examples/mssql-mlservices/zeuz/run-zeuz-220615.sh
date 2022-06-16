@@ -2,7 +2,9 @@
 EULA_STUFF="-e MSSQL_PID=Developer -e ACCEPT_EULA=Y -e ACCEPT_EULA_ML=Y "
 ddir=/mnt/c/var/lib/mssql/data
 mkdir -p $ddir
-. .env
+. .env &> /dev/null && echo "ENvironment loaded" || echo "Environment loading failed"
+if [ ! -f ".env" ] || [ "$SAPWD" == "" ];then echo ".env file not found or \$SAPWD variable not defined.";echo "echo \"SAPWD='MyP9ssw0rd2022' >> .env'\"";echo "wont do more ;)"
+else # Do the work
 mlocation=/data
 
 RUNMODE="run -d"
@@ -33,3 +35,11 @@ echo "$cmd"
 $cmd
 
 #jgwill/zeus:zeuz-2206150813 
+
+
+
+
+
+
+
+fi # we did the work if the env was fine
