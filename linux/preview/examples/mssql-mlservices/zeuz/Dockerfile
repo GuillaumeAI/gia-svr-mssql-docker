@@ -33,6 +33,52 @@ COPY ./supervisord.conf /usr/local/etc/supervisord.conf
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2019.list > /etc/apt/sources.list.d/mssql-server-2019.list
 
+
+
+
+
+# MSSQL
+RUN apt-get update && \
+        apt-get install -y mssql-server && \
+    # Cleanup the Dockerfile
+    apt-get clean && \
+    rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
+
+
+    # Install optional packages
+RUN    apt-get update && \
+       apt-get install -y mssql-server-ha  && \
+    # Cleanup the Dockerfile
+    apt-get clean && \
+    rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
+
+    # Install optional packages
+RUN    apt-get update && \
+       apt-get install -y mssql-server-fts  && \
+    # Cleanup the Dockerfile
+    apt-get clean && \
+    rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
+
+
+# SSIS
+
+RUN sudo apt-get update && \
+	apt-get install -y mssql-server-is && \
+    # Cleanup the Dockerfile
+    apt-get clean && \
+    rm -rf /var/apt/cache/* /tmp/* /var/tmp/* /var/lib/apt/lists
+
+COPY ssis.conf /var/opt/ssis/ssis.conf
+
+
+
+
+
+
+
+
+# ML
+
 # install SQL Server ML services R and Python packages which will also install the mssql-server pacakge, the package for SQL Server itself
 # if you want to install only Python or only R, you can add/remove the package as needed below
 RUN apt-get update && \
@@ -59,7 +105,14 @@ RUN /opt/mssql/bin/checkinstallextensibility.sh && \
 
 # expose SQL Server port
 EXPOSE 1433
+
+# would be SSIS, not sure
 EXPOSE 3882
+
+
+#old # Run SQL Server process
+#CMD /opt/mssql/bin/sqlservr
+
 
 # start services with supervisord
 CMD /usr/bin/supervisord -n -c /usr/local/etc/supervisord.conf
